@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<title>Inventario &amp; Logística – Representaciones Martín</title>
+
+
+	<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+
+	<script src="https://unpkg.com/feather-icons"></script>
+
+	<link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body>
+
+	<nav class="menu-bar">
+		<ul class="menu">
+			<li class="menu-item"><a href="#">📂 Archivo</a></li>
+			<li class="menu-item"><a href="#">✏️ Edición</a></li>
+			<li class="menu-item has-submenu">
+				🛠️ Procesos
+				<ul class="submenu">
+					<li><a id="mostrarLogistica">Registro Proveedor</a></li>
+
+
+					<script>
+						document
+							.getElementById('mostrarLogistica')
+							.addEventListener('click', () => {
+								document.getElementById('panelLogistica').style.display = 'block';
+							});
+					</script>
+					<li><a href="#" data-file="registrarArticulos.html">Registrar Artículos</a></li>
+					<li><a href="#" data-file="actualizarPrecios.html">Actualizar Precios</a></li>
+
+				</ul>
+			</li>
+			<li class="menu-item"><a href="#">📊 Reporte</a></li>
+			<li class="menu-item has-submenu">
+				❓ Ayuda
+				<ul class="submenu">
+					<li><a href="http://localhost:8085">Retornar</a></li>
+				</ul>
+			</li>
+		</ul>
+	</nav>
+
+
+	<main>
+
+		<div class="bg-layer"></div>
+
+		<section id="dynamic-area" class="content-area">
+			<h1>Bienvenido a Inventario &amp; Logística</h1>
+			<p>Selecciona un proceso en el menú para empezar.</p>
+			<div id="panelLogistica" style="display:none;">
+				<iframe src="http://localhost:8086/proveedores" width="100%" height="800px" frameborder="0">
+				</iframe>
+			</div>
+		</section>
+	</main>
+
+	<script>
+
+		document.addEventListener('DOMContentLoaded', () => {
+			if (window.feather) feather.replace();
+
+
+			document.querySelectorAll('[data-file]').forEach(a => {
+				a.addEventListener('click', e => {
+					e.preventDefault();
+
+					document.querySelectorAll('.submenu a').forEach(x => x.classList.remove('active'));
+					a.classList.add('active');
+
+					const file = a.dataset.file;
+					fetch(`procesos/${file}`)
+						.then(r => r.ok ? r.text() : Promise.reject(r.statusText))
+						.then(html => {
+							const area = document.getElementById('dynamic-area');
+							area.classList.add('fade-out');
+							setTimeout(() => {
+								area.innerHTML = html;
+								area.classList.remove('fade-out');
+								area.classList.add('fade-in');
+								setTimeout(() => area.classList.remove('fade-in'), 500);
+							}, 300);
+						})
+						.catch(err => {
+							document.getElementById('dynamic-area')
+								.innerHTML = `<p class="error">Error cargando ${file}: ${err}</p>`;
+						});
+				});
+			});
+		});
+	</script>
+</body>
+
+</html>

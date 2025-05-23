@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<title>SIGMA - GMProd 12.2.10</title>
+	<style>
+		body {
+			margin: 0;
+			font-family: Arial, sans-serif;
+			background-color: #a8f4a8;
+			color: #000;
+		}
+
+		.container {
+			display: flex;
+			flex-wrap: wrap;
+			padding: 10px;
+		}
+
+		.sidebar {
+			width: 300px;
+			background: #a8f4a8;
+			border-right: 1px solid #ccc;
+			padding: 10px;
+			box-sizing: border-box;
+		}
+
+		.sidebar img.avatar {
+			width: 80px;
+			display: block;
+			margin-bottom: 10px;
+		}
+
+		.datos-usuario {
+			background: #c8fcb8;
+			padding: 10px;
+			margin-bottom: 10px;
+			border: 1px solid #888;
+		}
+
+		.datos-usuario h2 {
+			margin-top: 0;
+			font-size: 1.2em;
+			text-align: center;
+		}
+
+		.datos-usuario p {
+			margin: 4px 0;
+			font-size: 0.9em;
+		}
+
+		.avisos,
+		.cumple {
+			margin-bottom: 10px;
+		}
+
+		.avisos img {
+			max-width: 100%;
+			margin-bottom: 5px;
+		}
+
+		.cumple table {
+			width: 100%;
+			border-collapse: collapse;
+			font-size: 0.8em;
+		}
+
+		.cumple th,
+		.cumple td {
+			border: 1px solid #999;
+			padding: 4px;
+			text-align: left;
+		}
+
+
+		.main {
+			flex: 1;
+			padding: 10px;
+			box-sizing: border-box;
+		}
+
+		.filters {
+			margin-bottom: 20px;
+		}
+
+		.filters label {
+			margin-right: 5px;
+			font-weight: bold;
+		}
+
+		.filters select {
+			margin-right: 20px;
+			padding: 4px;
+		}
+
+		.modules {
+			display: grid;
+			grid-template-columns: repeat(2, 1fr);
+			gap: 10px;
+		}
+
+		.modules button {
+			padding: 15px;
+			border: 1px solid #555;
+			background: #f0f0f0;
+			cursor: pointer;
+			font-weight: bold;
+		}
+
+		.modules button:hover {
+			background: #ddd;
+		}
+
+
+		.modal-overlay {
+			display: none;
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: rgba(0, 0, 0, 0.4);
+			justify-content: center;
+			align-items: center;
+		}
+
+		.modal {
+			background: #c8fcb8;
+			padding: 20px;
+			border: 1px solid #888;
+			min-width: 300px;
+			box-sizing: border-box;
+		}
+
+		.modal h3 {
+			margin-top: 0;
+			text-align: center;
+		}
+
+		.modal button {
+			display: block;
+			width: 100%;
+			padding: 10px;
+			margin: 5px 0;
+			border: 1px solid #555;
+			background: #f0f0f0;
+			cursor: pointer;
+			font-size: 1em;
+		}
+
+		.modal button:hover {
+			background: #ddd;
+		}
+
+		.modal .close-btn {
+			background: #e88;
+			color: #600;
+			margin-top: 10px;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+
+		<div class="sidebar">
+			<img class="avatar" src="imgs/LogoMartin_1.png" alt="Avatar">
+			<div class="datos-usuario">
+				<h2>Datos del Usuario</h2>
+				<p><strong>Nombres:</strong> Administrador</p>
+				<p><strong>Apellidos:</strong> Sistemas</p>
+				<p><strong>Area:</strong> CAJA</p>
+				<p><strong>Cargo:</strong> SUPERVISOR</p>
+				<p><strong>Sucursal:</strong> Villa El Salvador</p>
+				<hr>
+				<p><strong>Sistema:</strong> Windows 10</p>
+				<p><strong>Equipo:</strong> PELIMVESTDITC07.GRUPO MARTIN</p>
+			</div>
+			<div class="avisos">
+				<img src="imgs/Intro.png" alt="Martin">
+
+			</div>
+			<div class="cumple">
+				<h3>Cumpleaños</h3>
+				<div style="overflow-y:auto; height:120px;">
+					<table>
+						<thead>
+							<tr>
+								<th>Fecha</th>
+								<th>Nombre</th>
+								<th>Dept/Área</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>20/05</td>
+								<td>Canales Sifuentes B. María</td>
+								<td>Serv. Prod.</td>
+							</tr>
+							<tr>
+								<td>20/05</td>
+								<td>Díaz Martínez L.J.</td>
+								<td>Despacho</td>
+							</tr>
+							<tr>
+								<td>20/05</td>
+								<td>Colca Rosales M.J.</td>
+								<td>Tesorería</td>
+							</tr>
+							<tr>
+								<td>20/05</td>
+								<td>Aguirre Arteaga D.A.</td>
+								<td>Almacén Tien.</td>
+							</tr>
+							<tr>
+								<td>20/05</td>
+								<td>Carreño Chávez F.J.</td>
+								<td>Mantenimiento</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="main">
+			<div class="filters">
+				<label for="empresa">Empresa:</label>
+				<select id="empresa">
+					<option>Representaciones Martin</option>
+					<option>Otra Empresa</option>
+				</select>
+				<label for="sucursal">Sucursal:</label>
+				<select id="sucursal">
+					<option>Villa El Salvador</option>
+					<option>Otra Sucursal</option>
+				</select>
+			</div>
+			<div class="modules">
+				<button>ADMINISTRACIÓN Y FINANZAS</button>
+				<button id="btn-almacen">ALMACÉN Y LOGÍSTICA</button>
+				<button>COMERCIALIZACIÓN</button>
+				<button>PRODUCCIÓN</button>
+				<button>ESTRATÉGICA</button>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="modal-overlay" id="modal">
+		<div class="modal">
+			<h3>ALMACÉN Y LOGÍSTICA</h3>
+			<button id="mostrarLogistica">LOGÍSTICA</button>
+
+			<div id="panelLogistica" style="display:none;">
+
+			</div>
+
+			<script>
+				document
+					.getElementById('mostrarLogistica')
+					.addEventListener('click', () => {
+						document.getElementById('panelLogistica').style.display = 'block';
+						window.location.href = 'index2.html';
+					});
+			</script>
+			<button>INVENTARIO</button>
+			<button>ALMACÉN</button>
+			<button class="close-btn" id="close-modal">Cerrar</button>
+		</div>
+	</div>
+
+	<script>
+
+		const btnAlmacen = document.getElementById('btn-almacen');
+		const modal = document.getElementById('modal');
+		const closeBtn = document.getElementById('close-modal');
+
+		btnAlmacen.addEventListener('click', () => {
+			modal.style.display = 'flex';
+		});
+		closeBtn.addEventListener('click', () => {
+			modal.style.display = 'none';
+		});
+
+		modal.addEventListener('click', (e) => {
+			if (e.target === modal) {
+				modal.style.display = 'none';
+			}
+		});
+	</script>
+</body>
+
+</html>

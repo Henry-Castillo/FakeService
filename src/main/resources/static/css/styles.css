@@ -1,0 +1,109 @@
+/* VARIABLES y RESET */
+:root {
+  --primary: #2a7f62;
+  --light: #f5fdf9;
+  --dark: #1b3d34;
+  --accent: #e08f15;
+  --font: 'Rubik', sans-serif;
+  --transition: 0.3s;
+}
+* {
+  margin: 0; padding: 0;
+  box-sizing: border-box;
+  font-family: var(--font);
+}
+/* NAV */
+.menu-bar {
+  background: var(--dark);
+  padding: 0 1rem;
+  position: sticky; top: 0; z-index: 100;
+}
+.menu {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  height: 3.5rem;
+}
+.menu-item {
+  position: relative;
+  margin-right: 1.5rem;
+  color: var(--light);
+  cursor: pointer;
+  transition: color var(--transition);
+}
+.menu-item a {
+  color: inherit;
+  text-decoration: none;
+  font-weight: 500;
+}
+.menu-item:hover {
+  color: var(--accent);
+}
+.has-submenu .submenu {
+  list-style: none;
+  position: absolute;
+  top: 100%; left: 0;
+  background: var(--light);
+  min-width: 200px;
+  padding: .5rem 0;
+  border-radius: 0 0 4px 4px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  opacity: 0; visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity var(--transition), transform var(--transition);
+}
+.has-submenu:hover .submenu {
+  opacity: 1; visibility: visible;
+  transform: translateY(0);
+}
+.submenu li a {
+  display: block;
+  padding: .5rem 1rem;
+  color: var(--dark);
+  transition: background var(--transition);
+}
+.submenu li a.active,
+.submenu li a:hover {
+  background: var(--primary);
+  color: var(--light);
+}
+
+/* MAIN & BACKGROUND */
+main {
+  position: relative;
+  height: calc(100vh - 3.5rem);
+  overflow: hidden;
+}
+.bg-layer {
+  position: absolute; inset: 0;
+  background: url('../bg.png') center/cover no-repeat;
+  opacity: 0.07;
+}
+.content-area {
+  position: relative;
+  padding: 2rem;
+  height: 100%;
+  overflow-y: auto;
+}
+
+/* TRANSICIONES de CONTENIDO */
+.fade-out { opacity: 1; transition: opacity .3s; }
+.fade-out { opacity: 0; }
+.fade-in  { opacity: 0; transition: opacity .5s; }
+.fade-in  { opacity: 1; }
+
+/* ERRORES */
+.error {
+  color: #c00;
+  background: #fee;
+  padding: .5rem 1rem;
+  border-radius: 4px;
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .menu { flex-wrap: wrap; height: auto; }
+  .menu-item { margin: .5rem; }
+}
