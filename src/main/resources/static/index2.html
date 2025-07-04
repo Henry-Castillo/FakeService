@@ -24,9 +24,17 @@
 			<li class="menu-item has-submenu">
 				🛠️ Procesos
 				<ul class="submenu">
-					<li><a id="mostrarLogistica">Registro Proveedor</a></li>
+				
+					<li><a href="#" data-file="registrarArticulos.html">Registrar Artículos</a></li>
+					<li><a href="#" data-file="actualizarPrecios.html">Actualizar Precios</a></li>
 
-
+				</ul>
+			</li>
+			<li class="menu-item has-submenu">
+				📊 Reporte
+				<ul class="submenu">
+					<li><a id="mostrarLogistica">Reporte Zoom</a></li>
+					
 					<script>
 						document
 							.getElementById('mostrarLogistica')
@@ -34,12 +42,18 @@
 								document.getElementById('panelLogistica').style.display = 'block';
 							});
 					</script>
-					<li><a href="#" data-file="registrarArticulos.html">Registrar Artículos</a></li>
-					<li><a href="#" data-file="actualizarPrecios.html">Actualizar Precios</a></li>
-
+					<li><a id="mostrarLogistica2">Reporte de Pagos por Factura</a></li>
+										
+										<script>
+											document
+												.getElementById('mostrarLogistica2')
+												.addEventListener('click', () => {
+													document.getElementById('panelLogistica2').style.display = 'block';
+												});
+										</script>
 				</ul>
+				
 			</li>
-			<li class="menu-item"><a href="#">📊 Reporte</a></li>
 			<li class="menu-item has-submenu">
 				❓ Ayuda
 				<ul class="submenu">
@@ -58,9 +72,13 @@
 			<h1>Bienvenido a Inventario &amp; Logística</h1>
 			<p>Selecciona un proceso en el menú para empezar.</p>
 			<div id="panelLogistica" style="display:none;">
-				<iframe src="http://localhost:8086/proveedores" width="100%" height="800px" frameborder="0">
+				<iframe src="http://localhost:8086/reportes/zoom" width="100%" height="800px" frameborder="0">
 				</iframe>
 			</div>
+			<div id="panelLogistica2" style="display:none;">
+							<iframe src="http://localhost:8086/reportes/pagosFactura" width="100%" height="800px" frameborder="0">
+							</iframe>
+						</div>
 		</section>
 	</main>
 
